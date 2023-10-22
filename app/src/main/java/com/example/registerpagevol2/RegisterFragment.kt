@@ -2,19 +2,13 @@ package com.example.registerpagevol2
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.registerpagevol2.MainActivity.Companion.viewPagers
+import com.example.registerpagevol2.databinding.FragmentRegisterBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +25,8 @@ class RegisterFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentRegisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -43,52 +39,28 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // Inflate the layout for this fragment
 
-        val view = inflater.inflate(R.layout.fragment_register, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        with (view) {
-            val textTermsAndConditions: TextView = findViewById(R.id.txt_terms_and_conditions)
-            val textLogin: TextView = findViewById(R.id.txt_have_account)
-
-            val spannableTextTermsAndConditions = SpannableString(
-                "By clicking on Register, you agree to our Terms and Conditions"
-            )
-            val spannableTextLogin = SpannableString("Already have an account? Login")
-
-            spannableTextTermsAndConditions.setSpan(ForegroundColorSpan(ContextCompat.getColor(
-                requireContext(), R.color.blue)), 42, 48, 0)
-            spannableTextTermsAndConditions.setSpan(ForegroundColorSpan(ContextCompat.getColor(
-                requireContext(), R.color.blue)), 52, 62, 0)
-            spannableTextLogin.setSpan(ForegroundColorSpan(ContextCompat.getColor(
-                requireContext(), R.color.blue)), 25, 30, 0)
-
-            textTermsAndConditions.text = spannableTextTermsAndConditions
-            textLogin.text = spannableTextLogin
-
-            textLogin.setOnClickListener {
+        with (binding) {
+            txtLogin.setOnClickListener {
                 viewPagers.currentItem = 1
             }
 
-            val usernameInput = view.findViewById<EditText>(R.id.edit_txt_username)
-            val emailInput = view.findViewById<EditText>(R.id.edit_txt_email)
-            val phoneNumberInput = view.findViewById<EditText>(R.id.edit_txt_phone)
-            val passwordInput = view.findViewById<EditText>(R.id.edit_txt_password)
-            val checkbox = view.findViewById<CheckBox>(R.id.checkbox)
-            val btnRegister = view.findViewById<Button>(R.id.btn_register)
-
             btnRegister.setOnClickListener {
-                val username = usernameInput.text.toString()
-                val email = emailInput.text.toString()
-                val phoneNumber = phoneNumberInput.text.toString()
-                val password = passwordInput.text.toString()
+                val registeredUsername = editTxtUsername.text.toString()
+                val email = editTxtEmail.text.toString()
+                val phoneNumber = editTxtPhone.text.toString()
+                val registeredPassword = editTxtPassword.text.toString()
 
-                if(username.isEmpty() ||
+                if(registeredUsername.isEmpty() ||
                     email.isEmpty() ||
                     phoneNumber.isEmpty() ||
-                    password.isEmpty()){
+                    registeredPassword.isEmpty()){
                     Toast.makeText(requireContext(),
                         "Please fill all the fields",
                         Toast.LENGTH_SHORT).show()
@@ -99,11 +71,8 @@ class RegisterFragment : Fragment() {
                         Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    val bundle = Bundle()
-                    bundle.putString("username", username)
-                    bundle.putString("password", password)
-                    val loginFragment = LoginFragment()
-                    loginFragment.arguments = bundle
+                    username = registeredUsername
+                    password = registeredPassword
                     viewPagers.currentItem = 1
                 }
             }
@@ -112,6 +81,8 @@ class RegisterFragment : Fragment() {
     }
 
     companion object {
+        var username: String? = null
+        var password: String? = null
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.

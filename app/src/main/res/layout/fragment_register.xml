@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".RegisterFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,72 +16,72 @@
         android:layout_height="49dp"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/poppins"
+        android:gravity="center"
         android:text="Register"
         android:textColor="#1E293B"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_txt_username"
+        style="@style/CustomRoudedButtonGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="80dp"
         android:fontFamily="@font/poppins"
-        style="@style/CustomRoudedButtonGrey"
         android:hint="Username"
-        app:layout_constraintTop_toBottomOf="@id/txt_register"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_register" />
 
     <EditText
         android:id="@+id/edit_txt_email"
+        style="@style/CustomRoudedButtonGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins"
-        style="@style/CustomRoudedButtonGrey"
         android:hint="Email"
-        app:layout_constraintTop_toBottomOf="@id/edit_txt_username"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_txt_username" />
 
     <EditText
         android:id="@+id/edit_txt_phone"
-        android:inputType="phone"
+        style="@style/CustomRoudedButtonGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins"
-        style="@style/CustomRoudedButtonGrey"
         android:hint="Phone"
-        app:layout_constraintTop_toBottomOf="@id/edit_txt_email"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_txt_email" />
 
     <EditText
         android:id="@+id/edit_txt_password"
-        android:inputType="textPassword"
+        style="@style/CustomRoudedButtonGrey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins"
-        style="@style/CustomRoudedButtonGrey"
         android:hint="Password"
-        app:layout_constraintTop_toBottomOf="@id/edit_txt_phone"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_txt_phone" />
 
     <LinearLayout
         android:id="@+id/checkbox_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="60dp"
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/edit_txt_password">
 
         <CheckBox
@@ -94,9 +94,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textSize="10sp"
+            android:text="By checking the box you agree to our"
             android:textColor="#1E293B"
-            android:text="By checking the box you agree to our Terms and Conditions."/>
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Terms"
+            android:textColor="@color/blue"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="and"
+            android:textColor="#1E293B"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/txt_conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Conditions"
+            android:textColor="@color/blue"
+            android:textSize="10sp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -111,19 +135,43 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/checkbox_layout"/>
+        app:layout_constraintTop_toBottomOf="@id/checkbox_layout" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/txt_have_account"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="Already Have an Account? Login"
-        android:textColor="#1E293B"
-        android:textSize="12sp"
         android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_register">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Already Have an Account?"
+            android:textColor="#1E293B"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+
+        <TextView
+            android:id="@+id/txt_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text=" Login"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

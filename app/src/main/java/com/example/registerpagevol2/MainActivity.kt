@@ -11,11 +11,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var viewPagers: ViewPager2
-
-        const val EXTRA_USERNAME = "extra_username"
-        const val EXTRA_EMAIL = "extra_email"
-        const val EXTRA_PHONE_NUMBER = "extra_phone_number"
-        const val EXTRA_PASSWORD = "extra_password"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

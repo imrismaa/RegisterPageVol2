@@ -3,20 +3,13 @@ package com.example.registerpagevol2
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.example.registerpagevol2.MainActivity.Companion.viewPagers
+import com.example.registerpagevol2.databinding.FragmentLoginBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +26,8 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -46,50 +41,32 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val args = this.arguments
-        val registeredUsername = args?.getString("username")
-        val registeredPassword = args?.getString("password")
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        with (view) {
-            val btnLogin: Button = view.findViewById(R.id.btn_login)
-            val textNewMember: TextView = view.findViewById(R.id.txt_new_member)
-            val spannableTextRegister = SpannableString("New Member? Register")
-            val textUsn = findViewById<TextView>(R.id.edit_txt_username)
-            textUsn.hint = registeredUsername.toString()
-
-            spannableTextRegister.setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.blue)),
-                12, 20, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            textNewMember.text = spannableTextRegister
-
-            textNewMember.setOnClickListener {
+        with (binding) {
+            txtRegister.setOnClickListener {
                 viewPagers.currentItem = 0
             }
 
             btnLogin.setOnClickListener {
                 val intentToHomeActivity = Intent(requireActivity(), HomeActivity::class.java)
-                val username: EditText = view.findViewById(R.id.edit_txt_username)
-                val password: EditText = view.findViewById(R.id.edit_txt_password)
-                val checkbox: CheckBox = view.findViewById(R.id.checkbox)
 
-                val usernameInput = username.text.toString()
-                val passwordInput = password.text.toString()
+                val usernameInput = editTxtUsername.text.toString()
+                val passwordInput = editTxtPassword.text.toString()
 
-                val stringRegisteredUsername = registeredUsername.toString()
-                val stringRegisteredPassword = registeredPassword.toString()
-
+                val registeredUsername = RegisterFragment.username
+                val registeredPassword = RegisterFragment.password
 
                 if (usernameInput.isEmpty() && passwordInput.isEmpty()) {
                     Toast.makeText(requireContext(), "Please fill all the fields",
                         Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    if (usernameInput != stringRegisteredUsername ||
-                        passwordInput != stringRegisteredPassword) {
+                    if (usernameInput != registeredUsername ||
+                        passwordInput != registeredPassword) {
                         Toast.makeText(requireContext(), "Wrong username or password",
                             Toast.LENGTH_SHORT).show()
                     }
